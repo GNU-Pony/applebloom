@@ -1,1 +1,1 @@
-Now I know how to call I chicken: Scoo- Scoo- Scootaloo!
+Now I know how to call a chicken: Scoo- Scoo- Scootaloo!

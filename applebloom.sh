@@ -18,7 +18,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ##
 
-dictionary=.
+dictionary=dict
 
 if [ $# == 0 ]; then
     echo 'Apple Bloom the pony dictionary' >&2

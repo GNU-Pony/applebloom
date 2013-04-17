@@ -36,7 +36,7 @@ for word in "$@"; do
     fi
     if [ -L "$pony" ]; then
 	pony="$(realpath "$pony")"
-	fail=$(( $file * $? ))
+	fail=$(( $fail * $? ))
     fi
     if [ $fail = 0 ]; then	
 	if [ ! -f "$file" ]; then

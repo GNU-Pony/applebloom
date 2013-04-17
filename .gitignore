@@ -6,6 +6,7 @@ _/
 *.bak
 *.swp
 *.swo
+/applebloom
 *.gz
 *.xz
 *.install

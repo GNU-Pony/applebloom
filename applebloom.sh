@@ -18,7 +18,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ##
 
-dictionary=./
+dictionary=.
 
 if [ $# == 0 ]; then
     echo 'Apple Bloom the pony dictionary' >&2
@@ -27,11 +27,16 @@ if [ $# == 0 ]; then
 fi
 
 for word in "$@"; do
-    file="$dictionary${file/ /-/}"
+    human="$dictionary/${file/ /-/}.human"
+    pony="$dictionary/${file/ /-/}.pony"
     fail=0
-    if [ -L "$file" ]; then
-	file="$(realpath file)"
+    if [ -L "$human" ]; then
+	human="$(realpath "$human")"
 	fail=$?
+    fi
+    if [ -L "$pony" ]; then
+	pony="$(realpath "$pony")"
+	fail=$(( $file * $? ))
     fi
     if [ $fail = 0 ]; then	
 	if [ ! -f "$file" ]; then
@@ -41,8 +46,14 @@ for word in "$@"; do
     if [ ! $fail = 1 ]; then
 	echo "$word is not in the directionary try something more or less pony"
     else
-	echo -n "$word: "
-	cat "$file"
+	if [ ! "$pony" = '' ]; then
+	    echo -n "$word: pony word: "
+	    cat "$pony"
+	fi
+	if [ ! "$human" = '' ]; then
+	    echo -n "$word: human word: "
+	    cat "$human"
+	fi
     fi
 done
 

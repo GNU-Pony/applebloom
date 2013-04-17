@@ -39,8 +39,8 @@ for word in "$@"; do
 	fail=$(( $fail * $? ))
     fi
     if [ $fail = 0 ]; then	
-	if [ ! -f "$file" ]; then
-	    fail=$1
+	if [ ! -f "$human" ] && [ ! -f "$pony" ]; then
+	    fail=1
 	fi
     fi
     if [ ! $fail = 1 ]; then

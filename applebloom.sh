@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 ##
 # applebloom – Apple Bloom the pony dictionary
 # 

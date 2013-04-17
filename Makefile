@@ -7,7 +7,7 @@ PREFIX = /usr
 DATA = /share
 BIN = /bin
 PKGNAME = applebloom
-SHABANG = $(BIN)/sh
+SHABANG = $(BIN)/bash
 COMMAND = applebloom
 LICENSES = $(PREFIX)$(DATA)/$(PKGNAME)
 
@@ -32,7 +32,7 @@ info/%.texinfo.install: info/%.texinfo
 
 applebloom: applebloom.sh
 	cp applebloom.sh applebloom
-	sed -i 's:#!/bin/sh:#!$(SHEBANG)":'
+	sed -i 's:#!/bin/bash:#!$(SHEBANG)":'
 	sed -i 's:dictionary=dict:dictionary="$(DICT)":'
 
 install: applebloom

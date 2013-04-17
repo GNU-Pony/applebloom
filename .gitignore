@@ -9,8 +9,6 @@ _/
 *.gz
 *.xz
 *.install
-*.class
-/bin/
 *.aux
 *.cp
 *.fn

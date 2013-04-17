@@ -39,7 +39,7 @@ install: applebloom
 	install -dm755 "$(DESTDIR)$(PREFIX)$(BIN)"
 	install -m755 -T applebloom "$(DESTDIR)$(PREFIX)$(BIN)"
 	install -dm755 "$(DESTDIR)$(DICT)"
-	install -m755 -t "$(DESTDIR)$(DICT)" $(WORDS)
+	install -m755 -t "$(DESTDIR)$(DICT)" $(foreach $(WORDS), WORD, dictionary/$(WORD))
 	install -dm755 '$(DESTDIR)$(LICENSES)'
 	install -m644 COPYING LICENSE '$(DESTDIR)$(LICENSES)'
 	install -dm755 '$(DESTDIR)$(PREFIX)$(BIN)/info'

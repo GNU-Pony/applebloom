@@ -31,9 +31,9 @@ info/%.texinfo.install: info/%.texinfo
 	sed -i 's:^@set DICT /usr/share/applebloom:@set DICT $(DICT):g' "$@"
 
 applebloom: applebloom.sh
-	cp applebloom.sh applebloom
-	sed -i 's:#!/bin/bash:#!$(SHEBANG)":'
-	sed -i 's:dictionary=dictionary:dictionary="$(DICT)":'
+	cp "$<" "$@"
+	sed -i 's:#!/bin/bash:#!$(SHEBANG)":' "$@"
+	sed -i 's:dictionary=dictionary:dictionary="$(DICT)":' "$@"
 
 install: applebloom
 	install -dm755 "$(DESTDIR)$(PREFIX)$(BIN)"

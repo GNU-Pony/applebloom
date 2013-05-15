@@ -9,7 +9,7 @@ BIN = /bin
 PKGNAME = applebloom
 SHABANG = $(BIN)/bash
 COMMAND = applebloom
-LICENSES = $(PREFIX)$(DATA)/$(PKGNAME)
+LICENSES = $(PREFIX)$(DATA)
 
 DICT = $(PREFIX)$(DATA)$(PKGNAME)
 
@@ -35,23 +35,23 @@ applebloom: applebloom.sh
 	sed -i 's:#!/bin/bash:#!$(SHEBANG)":' "$@"
 	sed -i 's:dictionary=dictionary:dictionary="$(DICT)":' "$@"
 
-install: applebloom
+install: applebloom applebloom.info.gz
 	install -dm755 "$(DESTDIR)$(PREFIX)$(BIN)"
-	install -m755 -T applebloom "$(DESTDIR)$(PREFIX)$(BIN)"
+	install -m755 applebloom "$(DESTDIR)$(PREFIX)$(BIN)"
 	install -dm755 "$(DESTDIR)$(DICT)"
-	install -m755 -t "$(DESTDIR)$(DICT)" $(foreach $(WORDS), WORD, dictionary/$(WORD))
-	install -dm755 '$(DESTDIR)$(LICENSES)'
-	install -m644 COPYING LICENSE '$(DESTDIR)$(LICENSES)'
-	install -dm755 '$(DESTDIR)$(PREFIX)$(BIN)/info'
-	install -m644 -T celestia.info.gz "$(DESTDIR)$(PREFIX)$(DATA)"/info "$(PKGNAME).info.gz"
+	install -m755 -t "$(DESTDIR)$(DICT)" $(foreach WORD, $(WORDS), dictionary/$(WORD))
+	install -dm755 "$(DESTDIR)$(LICENSES)/$(PKGNAME)"
+	install -m644 COPYING LICENSE "$(DESTDIR)$(LICENSES)/$(PKGNAME)"
+	install -dm755 "$(DESTDIR)$(PREFIX)$(DATA)/info"
+	install -m644 applebloom.info.gz "$(DESTDIR)$(PREFIX)$(DATA)/info/$(PKGNAME).info.gz"
 
 uninstall:
 	rm -- "$(DESTDIR)$(PREFIX)$(BIN)/$(COMMAND)"
-	rm -- '$(DESTDIR)$(LICENSES)/COPYING'
-	rm -- '$(DESTDIR)$(LICENSES)/LICENSE'
-	rmdir -- '$(DESTDIR)$(LICENSES)' || true
-	rm -- '$(DESTDIR)$(PREFIX)$(DATA)"/info/$(PKGNAME).info.gz'
-	rm -r -- '$(DESTDIR)$(DICT)'
+	rm -- "$(DESTDIR)$(LICENSES)/$(PKGNAME)/COPYING"
+	rm -- "$(DESTDIR)$(LICENSES)/$(PKGNAME)/LICENSE"
+	rmdir -- "$(DESTDIR)$(LICENSES)/$(PKGNAME)"
+	rm -- "$(DESTDIR)$(PREFIX)$(DATA)/info/$(PKGNAME).info.gz"
+	rm -r -- "$(DESTDIR)$(DICT)"
 
 .PHONY: clean
 clean:

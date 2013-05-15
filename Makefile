@@ -11,7 +11,7 @@ SHABANG = $(BIN)/bash
 COMMAND = applebloom
 LICENSES = $(PREFIX)$(DATA)
 
-DICT = $(PREFIX)$(DATA)$(PKGNAME)
+DICT = $(PREFIX)$(DATA)/$(PKGNAME)
 
 WORDS = $(shell find dictionary | sed -e 's:^dictionary/::' | egrep -v '^\.' | egrep '\.(pony|human)$$')
 

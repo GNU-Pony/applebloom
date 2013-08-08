@@ -37,7 +37,7 @@ applebloom: applebloom.sh
 
 install: applebloom applebloom.info.gz
 	install -dm755 -- "$(DESTDIR)$(PREFIX)$(BIN)"
-	install -m755 applebloom -- "$(DESTDIR)$(PREFIX)$(BIN)"
+	install -m755 applebloom -- "$(DESTDIR)$(PREFIX)$(BIN)/$(COMMAND)"
 	install -dm755 -- "$(DESTDIR)$(DICT)"
 	install -m755 -t "$(DESTDIR)$(DICT)" $(foreach WORD, $(WORDS), dictionary/$(WORD))
 	install -dm755 -- "$(DESTDIR)$(PREFIX)$(LICENSES)/$(PKGNAME)"

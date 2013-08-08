@@ -9,7 +9,7 @@ BIN = /bin
 PKGNAME = applebloom
 SHEBANG = $(BIN)/bash
 COMMAND = applebloom
-LICENSES = $(PREFIX)$(DATA)
+LICENSES = $(DATA)/licenses
 
 DICT = $(PREFIX)$(DATA)/$(PKGNAME)
 
@@ -40,18 +40,18 @@ install: applebloom applebloom.info.gz
 	install -m755 applebloom -- "$(DESTDIR)$(PREFIX)$(BIN)"
 	install -dm755 -- "$(DESTDIR)$(DICT)"
 	install -m755 -t "$(DESTDIR)$(DICT)" $(foreach WORD, $(WORDS), dictionary/$(WORD))
-	install -dm755 -- "$(DESTDIR)$(LICENSES)/$(PKGNAME)"
-	install -m644 COPYING LICENSE -- "$(DESTDIR)$(LICENSES)/$(PKGNAME)"
+	install -dm755 -- "$(DESTDIR)$(PREFIX)$(LICENSES)/$(PKGNAME)"
+	install -m644 COPYING LICENSE -- "$(DESTDIR)$(PREFIX)$(LICENSES)/$(PKGNAME)"
 	install -dm755 -- "$(DESTDIR)$(PREFIX)$(DATA)/info"
 	install -m644 applebloom.info.gz -- "$(DESTDIR)$(PREFIX)$(DATA)/info/$(PKGNAME).info.gz"
 
 uninstall:
-	rm -- "$(DESTDIR)$(PREFIX)$(BIN)/$(COMMAND)"
-	rm -- "$(DESTDIR)$(LICENSES)/$(PKGNAME)/COPYING"
-	rm -- "$(DESTDIR)$(LICENSES)/$(PKGNAME)/LICENSE"
-	rmdir -- "$(DESTDIR)$(LICENSES)/$(PKGNAME)"
-	rm -- "$(DESTDIR)$(PREFIX)$(DATA)/info/$(PKGNAME).info.gz"
-	rm -r -- "$(DESTDIR)$(DICT)"
+	-rm -- "$(DESTDIR)$(PREFIX)$(BIN)/$(COMMAND)"
+	-rm -- "$(DESTDIR)$(PREFIX)$(LICENSES)/$(PKGNAME)/COPYING"
+	-rm -- "$(DESTDIR)$(PREFIX)$(LICENSES)/$(PKGNAME)/LICENSE"
+	-rmdir -- "$(DESTDIR)$(PREFIX)$(LICENSES)/$(PKGNAME)"
+	-rm -- "$(DESTDIR)$(PREFIX)$(DATA)/info/$(PKGNAME).info.gz"
+	-rm -r -- "$(DESTDIR)$(DICT)"
 
 .PHONY: clean
 clean:

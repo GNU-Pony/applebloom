@@ -7,7 +7,7 @@ PREFIX = /usr
 DATA = /share
 BIN = /bin
 PKGNAME = applebloom
-SHABANG = $(BIN)/bash
+SHEBANG = $(BIN)/bash
 COMMAND = applebloom
 LICENSES = $(PREFIX)$(DATA)
 
@@ -32,18 +32,18 @@ info/%.texinfo.install: info/%.texinfo
 
 applebloom: applebloom.sh
 	cp "$<" "$@"
-	sed -i 's:#!/bin/bash:#!$(SHEBANG)":' "$@"
+	sed -i 's:#!/bin/bash:#!$(SHEBANG):' "$@"
 	sed -i 's:dictionary=dictionary:dictionary="$(DICT)":' "$@"
 
 install: applebloom applebloom.info.gz
-	install -dm755 "$(DESTDIR)$(PREFIX)$(BIN)"
-	install -m755 applebloom "$(DESTDIR)$(PREFIX)$(BIN)"
-	install -dm755 "$(DESTDIR)$(DICT)"
+	install -dm755 -- "$(DESTDIR)$(PREFIX)$(BIN)"
+	install -m755 applebloom -- "$(DESTDIR)$(PREFIX)$(BIN)"
+	install -dm755 -- "$(DESTDIR)$(DICT)"
 	install -m755 -t "$(DESTDIR)$(DICT)" $(foreach WORD, $(WORDS), dictionary/$(WORD))
-	install -dm755 "$(DESTDIR)$(LICENSES)/$(PKGNAME)"
-	install -m644 COPYING LICENSE "$(DESTDIR)$(LICENSES)/$(PKGNAME)"
-	install -dm755 "$(DESTDIR)$(PREFIX)$(DATA)/info"
-	install -m644 applebloom.info.gz "$(DESTDIR)$(PREFIX)$(DATA)/info/$(PKGNAME).info.gz"
+	install -dm755 -- "$(DESTDIR)$(LICENSES)/$(PKGNAME)"
+	install -m644 COPYING LICENSE -- "$(DESTDIR)$(LICENSES)/$(PKGNAME)"
+	install -dm755 -- "$(DESTDIR)$(PREFIX)$(DATA)/info"
+	install -m644 applebloom.info.gz -- "$(DESTDIR)$(PREFIX)$(DATA)/info/$(PKGNAME).info.gz"
 
 uninstall:
 	rm -- "$(DESTDIR)$(PREFIX)$(BIN)/$(COMMAND)"
@@ -55,5 +55,5 @@ uninstall:
 
 .PHONY: clean
 clean:
-	rm -f applebloom || true
+	-rm -f applebloom
 

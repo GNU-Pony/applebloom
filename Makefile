@@ -55,5 +55,5 @@ uninstall:
 
 .PHONY: clean
 clean:
-	-rm -f applebloom
+	-rm -f applebloom applebloom.info.gz
 

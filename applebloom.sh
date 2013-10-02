@@ -26,24 +26,24 @@ export TEXTDOMAINDIR=/usr/share/locale
 
 _usage ()
 {
-    echo "$(gettext -- 'Apple Bloom the pony dictionary')"
-    echo "$(gettext -- 'applebloom [word...]')"
+    echo "$(gettext -n -- 'Apple Bloom the pony dictionary')"
+    echo "applebloom $(gettext -n -- '[word...]')"
 }
 
 _not_found ()
 {
-    echo "$1 $(gettext -- 'is not in the dictionary try something more or less pony')"
+    echo "$1 $(gettext -n -- 'is not in the dictionary try something more or less pony')"
 }
 
 _pony ()
 {
-    echo -n "$1: $(gettext -- 'pony word'): "
+    echo -n "$1: $(gettext -n -- 'pony word'): "
     cat "$2"
 }
 
 _human ()
 {
-    echo -n "$1: $(gettext -- 'human word'): "
+    echo -n "$1: $(gettext -n -- 'human word'): "
     cat "$2"
 }
 

@@ -51,7 +51,7 @@ for word in "$@"; do
     fi
     fail=$(( $hfail * $pfail ))
     if [ ! $fail = 0 ]; then
-	echo "$word is not in the directionary try something more or less pony"
+	echo "$word is not in the dictionary try something more or less pony"
     else
 	if [ $pfail = 0 ]; then
 	    echo -n "$word: pony word: "

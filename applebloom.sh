@@ -52,6 +52,10 @@ if [ ! -z "$XDG_CONFIG_HOME" ] && [ -f "$XDG_CONFIG_HOME/applebloom/applebloomrc
     . "$XDG_CONFIG_HOME/applebloom/applebloomrc"
 elif [ ! -z "$HOME" ] && [ -f "$HOME/.config/applebloom/applebloomrc" ]; then
     . "$HOME/.config/applebloom/applebloomrc"
+elif [ ! -z "$HOME" ] && [ -f "$HOME/.config/applebloomrc" ]; then
+    . "$HOME/.config/applebloomrc"
+elif [ ! -z "$HOME" ] && [ -f "$HOME/.config/.applebloomrc" ]; then
+    . "$HOME/.config/.applebloomrc"
 elif [ ! -z "$HOME" ] && [ -f "$HOME/.applebloomrc" ]; then
     . "$HOME/.applebloomrc"
 elif [ -f ~/.applebloomrc ]; then

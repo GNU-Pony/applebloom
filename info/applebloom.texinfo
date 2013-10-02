@@ -11,6 +11,7 @@
 
 @c --- start of do not touch ---
 @set DICT /usr/share/applebloom
+@set COMMAND applebloom
 @c --- end of do not touch ---
 
 
@@ -58,6 +59,7 @@ Texts. A copy of the license is included in the section entitled
 
 @menu
 * Overview::                        Brief overview of @command{applebloom}.
+* Customisability::                 Customising @command{applebloom}
 * GNU Free Documentation License::  Copying and sharing this manual.
 @end menu
 
@@ -69,7 +71,7 @@ Texts. A copy of the license is included in the section entitled
 Apple Bloom is a simple dictionary that will help you incase you get lost
 in either human or pony@footnote{Not that likely, but just in case} jargon.
 
-@command{applebloom} is very easy to use, for its arguments you just add
+@command{@value{COMMAND}} is very easy to use, for its arguments you just add
 each word you need help with, and applebloom will try to explain it, and
 even tell you whether it is a human word or a pony word.
 
@@ -77,6 +79,37 @@ Apple Bloom keeps all words she knows of in @file{@value{DICT}}, with each
 human word appended with @code{.human} and each pony word appended with
 @code{.pony}, additionally all blank spaces in the file name is replaced by
 a hyphen.
+
+
+
+@node Customisability
+@chapter Customisability
+
+By adding the file @file{~/.config/@value{COMMAND}/@value{COMMAND}rc} to
+your system you can customise Apple Bloom by changing the program's functions:
+
+@table @code
+@item _usage
+Prints the message on how to use the program is n words are given.
+
+@item _not_found
+Informs the users that a word was not found in the dictionary.
+The parameter @code{$1} holds the word.
+
+@item _pony
+Called when a pony word has been found.
+
+The parameter @code{$1} holds the word and the parameter @code{2}
+holds the file to @command{cat} to get the definition of the word.
+
+@item _human
+Called when a human word has been found.
+
+The parameter @code{$1} holds the word and the parameter @code{2}
+holds the file to @command{cat} to get the definition of the word.
+
+@end table
+
 
 
 @node GNU Free Documentation License

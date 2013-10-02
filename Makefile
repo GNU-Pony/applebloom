@@ -29,6 +29,7 @@ info: applebloom.info.gz
 info/%.texinfo.install: info/%.texinfo
 	cp "$<" "$@"
 	sed -i 's:^@set DICT /usr/share/applebloom:@set DICT $(DICT):g' "$@"
+	sed -i 's:^@set COMMAND applebloom:@set COMMAND $(COMMAND):g' "$@"
 
 applebloom: applebloom.sh
 	cp "$<" "$@"

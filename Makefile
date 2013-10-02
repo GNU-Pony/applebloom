@@ -34,6 +34,11 @@ applebloom: applebloom.sh
 	cp "$<" "$@"
 	sed -i 's:#!/bin/bash:#!$(SHEBANG):' "$@"
 	sed -i 's:dictionary=dictionary:dictionary="$(DICT)":' "$@"
+	sed -i "/gettext/s/applebloom/$(COMMAND)/" "$@"
+	sed -i "s/export TEXTDOMAIN=applebloom/export TEXTDOMAIN=$(PKGNAME)/" "$@"
+	sed -i "s:export TEXTDOMAINDIR=/usr/share/locale:export TEXTDOMAINDIR='$(PREFIX)$(DATA)/locale':" "$@"
+	sed -i "s:applebloomrc:$(COMMAND)rc:g" "$@"
+	sed -i "s:/applebloom/:/$(COMMAND)/:g" "$@"
 
 install: applebloom applebloom.info.gz
 	install -dm755 -- "$(DESTDIR)$(PREFIX)$(BIN)"

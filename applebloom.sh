@@ -21,26 +21,29 @@
 
 dictionary=dictionary
 
+export TEXTDOMAIN=applebloom
+export TEXTDOMAINDIR=/usr/share/locale
+
 _usage ()
 {
-    echo 'Apple Bloom the pony dictionary'
-    echo 'applebloom [word...]'
+    echo "$(gettext -- 'Apple Bloom the pony dictionary')"
+    echo "$(gettext -- 'applebloom [word...]')"
 }
 
 _not_found ()
 {
-    echo "$1 is not in the dictionary try something more or less pony"
+    echo "$1 $(gettext -- 'is not in the dictionary try something more or less pony')"
 }
 
 _pony ()
 {
-    echo -n "$1: pony word: "
+    echo -n "$1: $(gettext -- 'pony word'): "
     cat "$2"
 }
 
 _human ()
 {
-    echo -n "$1: human word: "
+    echo -n "$1: $(gettext -- 'human word'): "
     cat "$2"
 }
 

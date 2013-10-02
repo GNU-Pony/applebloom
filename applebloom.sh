@@ -18,11 +18,48 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ##
 
+
 dictionary=dictionary
 
+_usage ()
+{
+    echo 'Apple Bloom the pony dictionary'
+    echo 'applebloom [word...]'
+}
+
+_not_found ()
+{
+    echo "$1 is not in the dictionary try something more or less pony"
+}
+
+_pony ()
+{
+    echo -n "$1: pony word: "
+    cat "$2"
+}
+
+_human ()
+{
+    echo -n "$1: human word: "
+    cat "$2"
+}
+
+
+if [ ! -z "$XDG_CONFIG_HOME" ] && [ -f "$XDG_CONFIG_HOME/applebloom/applebloomrc" ]; then
+    . "$XDG_CONFIG_HOME/applebloom/applebloomrc"
+elif [ ! -z "$HOME" ] && [ -f "$HOME/.config/applebloom/applebloomrc" ]; then
+    . "$HOME/.config/applebloom/applebloomrc"
+elif [ ! -z "$HOME" ] && [ -f "$HOME/.applebloomrc" ]; then
+    . "$HOME/.applebloomrc"
+elif [ -f ~/.applebloomrc ]; then
+    . ~/.applebloomrc
+elif [ -f /etc/applebloomrc ]; then
+    . /etc/applebloomrc
+fi
+
+
 if [ $# == 0 ]; then
-    echo 'Apple Bloom the pony dictionary' >&2
-    echo 'applebloom [word...]' >&2
+    _usage >&2
     exit 1
 fi
 
@@ -51,15 +88,13 @@ for word in "$@"; do
     fi
     fail=$(( $hfail * $pfail ))
     if [ ! $fail = 0 ]; then
-	echo "$word is not in the dictionary try something more or less pony"
+	_not_found "$word"
     else
 	if [ $pfail = 0 ]; then
-	    echo -n "$word: pony word: "
-	    cat "$pony"
+	    _pony "$word" "$pony"
 	fi
 	if [ $hfail = 0 ]; then
-	    echo -n "$word: human word: "
-	    cat "$human"
+	    _pony "$word" "$human"
 	fi
     fi
 done

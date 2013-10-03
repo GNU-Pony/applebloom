@@ -18,11 +18,19 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ##
 
+is_backend=0
+if [ "$1" == "--back-end" ]; then
+    is_backend=1
+    shift 1
+fi
+
 
 dictionary=dictionary
 
-export TEXTDOMAIN=applebloom
-export TEXTDOMAINDIR=/usr/share/locale
+if [ $is_backend = 0 ]; then
+    export TEXTDOMAIN=applebloom
+    export TEXTDOMAINDIR=/usr/share/locale
+fi
 
 _usage ()
 {
@@ -48,20 +56,22 @@ _human ()
 }
 
 
-if [ ! -z "$XDG_CONFIG_HOME" ] && [ -f "$XDG_CONFIG_HOME/applebloom/applebloomrc" ]; then
-    . "$XDG_CONFIG_HOME/applebloom/applebloomrc"
-elif [ ! -z "$HOME" ] && [ -f "$HOME/.config/applebloom/applebloomrc" ]; then
-    . "$HOME/.config/applebloom/applebloomrc"
-elif [ ! -z "$HOME" ] && [ -f "$HOME/.config/applebloomrc" ]; then
-    . "$HOME/.config/applebloomrc"
-elif [ ! -z "$HOME" ] && [ -f "$HOME/.config/.applebloomrc" ]; then
-    . "$HOME/.config/.applebloomrc"
-elif [ ! -z "$HOME" ] && [ -f "$HOME/.applebloomrc" ]; then
-    . "$HOME/.applebloomrc"
-elif [ -f ~/.applebloomrc ]; then
-    . ~/.applebloomrc
-elif [ -f /etc/applebloomrc ]; then
-    . /etc/applebloomrc
+if [ $is_backend = 0 ]; then
+    if [ ! -z "$XDG_CONFIG_HOME" ] && [ -f "$XDG_CONFIG_HOME/applebloom/applebloomrc" ]; then
+	. "$XDG_CONFIG_HOME/applebloom/applebloomrc"
+    elif [ ! -z "$HOME" ] && [ -f "$HOME/.config/applebloom/applebloomrc" ]; then
+	. "$HOME/.config/applebloom/applebloomrc"
+    elif [ ! -z "$HOME" ] && [ -f "$HOME/.config/applebloomrc" ]; then
+	. "$HOME/.config/applebloomrc"
+    elif [ ! -z "$HOME" ] && [ -f "$HOME/.config/.applebloomrc" ]; then
+	. "$HOME/.config/.applebloomrc"
+    elif [ ! -z "$HOME" ] && [ -f "$HOME/.applebloomrc" ]; then
+	. "$HOME/.applebloomrc"
+    elif [ -f ~/.applebloomrc ]; then
+	. ~/.applebloomrc
+    elif [ -f /etc/applebloomrc ]; then
+	. /etc/applebloomrc
+    fi
 fi
 
 

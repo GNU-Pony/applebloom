@@ -110,6 +110,9 @@ holds the file to @command{cat} to get the definition of the word.
 
 @end table
 
+Front-ends can pass @option{--back-end} as the first argument to
+disable this as well as internationalisation.
+
 
 
 @node GNU Free Documentation License

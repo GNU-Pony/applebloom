@@ -83,6 +83,8 @@ fi
 for word in "$@"; do
     human="$dictionary/${word/ /-}.human"
     pony="$dictionary/${word/ /-}.pony"
+    human="${human,,}"
+    pony="${pony,,}"
     hfail=0
     pfail=0
     if [ -L "$human" ]; then

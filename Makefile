@@ -114,8 +114,8 @@ install-dict:
 
 .PHONY: install-license
 install-license:
-	install -dm755 -- "$(DESTDIR)$(LICENSES)/$(PKGNAME)"
-	install -m644 COPYING LICENSE -- "$(DESTDIR)$(LICENSES)/$(PKGNAME)"
+	install -dm755 -- "$(DESTDIR)$(LICENSEDIR)/$(PKGNAME)"
+	install -m644 COPYING LICENSE -- "$(DESTDIR)$(LICENSEDIR)/$(PKGNAME)"
 
 .PHONY: install-doc
 install-doc: install-info install-pdf install-dvi install-ps
@@ -146,9 +146,9 @@ install-ps: applebloom.ps
 .PHONY: uninstall
 uninstall:
 	-rm -- "$(DESTDIR)$(BINDIR)/$(COMMAND)"
-	-rm -- "$(DESTDIR)$(LICENSES)/$(PKGNAME)/COPYING"
-	-rm -- "$(DESTDIR)$(LICENSES)/$(PKGNAME)/LICENSE"
-	-rmdir -- "$(DESTDIR)$(LICENSES)/$(PKGNAME)"
+	-rm -- "$(DESTDIR)$(LICENSEDIR)/$(PKGNAME)/COPYING"
+	-rm -- "$(DESTDIR)$(LICENSEDIR)/$(PKGNAME)/LICENSE"
+	-rmdir -- "$(DESTDIR)$(LICENSEDIR)/$(PKGNAME)"
 	-rm -- "$(DESTDIR)$(INFODIR)/$(PKGNAME).info"
 	-rm -- "$(DESTDIR)$(DOCDIR)/$(PKGNAME).pdf"
 	-rm -- "$(DESTDIR)$(DOCDIR)/$(PKGNAME).dvi"
